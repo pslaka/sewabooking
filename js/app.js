@@ -63,7 +63,8 @@ document.addEventListener('DOMContentLoaded', e => {
             document.getElementById('insurance').innerHTML = 'Rs ' + insurance;
 
             // calculate total bill amt
-            var total_amt ='Rs ' + current_tax + unpaid_tax + tax_penalty + model_charge + renewal_charge + renewal_fine + charge[0];
+            var total_bill =current_tax + unpaid_tax + tax_penalty + model_charge + renewal_charge + renewal_fine + charge[0] + insurance;
+            var total_amt ='Rs ' + total_bill;
             document.getElementById('totalamt').innerHTML = total_amt;
 
         }else{
