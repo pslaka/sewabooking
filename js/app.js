@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', e => {
             document.getElementById('insurance').innerHTML = 'Rs ' + insurance;
 
             // calculate total bill amt
-            var total_amt = current_tax + unpaid_tax + tax_penalty + model_charge + renewal_charge + renewal_fine + charge[0];
+            var total_amt ='Rs ' current_tax + unpaid_tax + tax_penalty + model_charge + renewal_charge + renewal_fine + charge[0];
             document.getElementById('totalamt').innerHTML = total_amt;
 
         }else{
@@ -83,9 +83,10 @@ document.addEventListener('DOMContentLoaded', e => {
             if (!popup.contains(event.target))  {
                 popup.style.display = "none";
                 //to reset the form data
-                document.getElementById('my-form').reset();
+                
             }
         })
+        document.getElementById('my-form').reset();
    
         
 
