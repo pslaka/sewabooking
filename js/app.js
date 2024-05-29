@@ -14,7 +14,8 @@ document.addEventListener('DOMContentLoaded', e => {
       let renew_date = formData.get('renew_date');
       let expiry_date = formData.get('expiry_date');
       let model = formData.get('age');
-      let checked = formData.get('checked').checked;
+      let checked = document.getElementById('checked').checked;
+      console.log(checked)
 
       let current_date = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentBsDate(), "YYYY-MM-DD")
       let fiscal_year = [ '2080-04-01',  '2079-04-01',  '2078-04-01',  '2077-04-01',  '2076-04-01'];
@@ -58,7 +59,7 @@ document.addEventListener('DOMContentLoaded', e => {
 
             // Getting value from Function Calculate_insurance an then return value in  DOTM
             var insurance = Calculate_insurance(cc,checked);
-            console.log('renewal fine',insurance);
+            console.log('insurance',insurance);
             document.getElementById('insurance').innerHTML = 'Rs ' + insurance;
 
             // calculate total bill amt
