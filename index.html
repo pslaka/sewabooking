@@ -5,13 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
        <!-- Nepali Datepicker CSS -->
+       <link rel="stylesheet" href="css/style.css">
+       <link rel="stylesheet" href="style.css">
        <link href="css\nepali.datepicker.v4.0.1.min.css" rel="stylesheet" type="text/css"/>
        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
        <!-- npx tailwindcss -i ./css/input.css -o ./css/style.css --watch -->
 
     <title>Sewa Booking</title>
 </head>
-<body class="font-thin">
+<body id="body-content" class="font-thin">
     <header class="h-[200px] bg-violet-500 ">
         <div class="w-2/3 mx-auto flex flex-col items-center pt-12">
                 <h1 class="text-4xl md:text-5xl font-extrabold">
@@ -84,7 +86,7 @@
 
     <!-- popup content -->
 
-        <div class="fixed top-[100px] md:top-[150px] inset-x-[20%] rounded-xl justify-center  border-2 bg-slate-50 border-gray-200 shadow-xl h-auto px-10 hidden" id="popup">
+        <div class="fixed top-[5%] md:top-[50px] md:inset-x-[20%] inset-x-0  rounded-xl justify-center  border-2 bg-slate-50 border-gray-200 shadow-xl h-auto px-10 hidden" id="popup">
             
             <div class="font-medium text-gray-800">
                 <div class="flex justify-between py-4 border-b-2 ">          
@@ -182,6 +184,7 @@
         ndpYear: true,
         ndpMonth: true,
         ndpYearCount: 15 ,
+        disableDaysAfter: 365,
         });
     };
   
@@ -198,11 +201,16 @@
     document.getElementById("my-form").addEventListener("submit", function(event) {
         event.preventDefault();
         popup.style.display = "block";
+        document.body.classList.add('popup-active');
+
     });
 
         // Hide the popup when the close button is clicked
     document.getElementById("close-popup-button").addEventListener("click", function() {
         popup.style.display = "none";
+        document.body.classList.remove('popup-active');
+
+        
     });
         //to close id popup while clicking outside of popup div
    
