@@ -52,7 +52,7 @@
                     </div> -->
                     <div class="flex flex-col xl:w-[48.5%] lg:w-[39%] w-full font-medium">
                         <label for="nepali-datepicker2" class="py-2">Expiry Date</label>                    
-                        <input type="text" name="expiry_date" id="nepali-datepicker2" value="" placeholder="Select Expiry Date" class="ring-1 py-1.5 pl-2 pr-2 rounded-md ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 hover:ring-violet-900 ease-out duration-300" required>
+                        <input type="text" name="expiry_date" id="nepali-datepicker2" value="" placeholder="Select Expiry Date (Y-M-D)" class="ring-1 py-1.5 pl-2 pr-2 rounded-md ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 hover:ring-violet-900 ease-out duration-300" required>
                     </div>
                     <!-- <div class="flex flex-col xl:w-[48.5%] lg:w-[39%] w-full font-medium">
                         <label for="Name" class="py-2">Province</label>
@@ -68,7 +68,11 @@
                           <label for="seats" class="py-2">Number Of Seats</label>
                           <input type="number"  name="seats" id="seats"  placeholder="No of Seats" class=" ring-1 py-1.5 pl-2 pr-2 rounded-md ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 hover:ring-violet-900 ease-out duration-300" >            
                         </div>
-                    </div>  
+                    </div> 
+                    <div class="w-full flex justify-center pt-6">
+                        <label for="" class="pr-7 font-bold">Thirdparty Insurance</label>
+                        <input type="checkbox" name="checked" id="checked" >
+                    </div> 
                     <div class="w-full flex justify-center pt-6">
                         <button   id="submit"  class="md:w-32 w-24 bg-violet-600 text-white py-1.5 px-2 rounded-md hover:bg-violet-900 ease-out duration-300">Calculate</button>
                     </div>
@@ -125,6 +129,10 @@
                             <td class="p-2">Service Charge</td>
                             <td class="p-2" id="charge"></td>
                         </tr>
+                        <tr class="border-b-[2px] border-black">
+                            <td class="p-2">Third-Party insurance</td>
+                            <td class="p-2" id="insurance"></td>
+                        </tr>
                         <thead class=" font-semibold">
                             <td class="p-2">Total Bill Amount</td>
                             <td class="p-2" id="totalamt"> </td>
@@ -174,8 +182,7 @@
         ndpYear: true,
         ndpMonth: true,
         ndpYearCount: 15 ,
-          
-      });
+        });
     };
   
     document.getElementById("vehicle").addEventListener("change", function() {
@@ -198,11 +205,7 @@
         popup.style.display = "none";
     });
         //to close id popup while clicking outside of popup div
-    window.addEventListener("click" , (event) => {
-        if (!popup.contains(event.target))  {
-            popup.style.display = "none";
-        }
-    })
+   
 
 
 </script>
