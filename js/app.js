@@ -79,14 +79,14 @@ document.addEventListener('DOMContentLoaded', e => {
         var timestampDifference = NepaliFunctions.BsDatesDiff(current_date,expiry_date);
         console.log('difference :',timestampDifference);
 
-        //to close popup while click outside of box
-        window.addEventListener("click" , (event) => {
-            if (!popup.contains(event.target))  {
-                popup.style.display = "none";
-                //to reset the form data
+        // //to close popup while click outside of box
+        // window.addEventListener("click" , (event) => {
+        //     if (!popup.contains(event.target))  {
+        //         popup.style.display = "none";
+        //         //to reset the form data
                 
-            }
-        })
+        //     }
+        // })
         document.getElementById('my-form').reset();
    
         
