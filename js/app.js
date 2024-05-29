@@ -1,8 +1,10 @@
 
+//to trigger thr my-form div for input and popup div for output
 document.addEventListener('DOMContentLoaded', e => {
   let formElement = document.getElementById('my-form');
   let resultDiv = document.getElementById('popup');
 
+  //to prevent from form submitting  
   formElement.addEventListener('submit', e => {
       e.preventDefault();
       // getting field value by name
@@ -12,6 +14,7 @@ document.addEventListener('DOMContentLoaded', e => {
       let renew_date = formData.get('renew_date');
       let expiry_date = formData.get('expiry_date');
       let model = formData.get('age');
+      let checked = formData.get('checked').checked;
 
       let current_date = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentBsDate(), "YYYY-MM-DD")
       let fiscal_year = [ '2080-04-01',  '2079-04-01',  '2078-04-01',  '2077-04-01',  '2076-04-01'];
@@ -40,7 +43,7 @@ document.addEventListener('DOMContentLoaded', e => {
             console.log('Model charge',model_charge);
             document.getElementById('model-charge').innerHTML = 'Rs ' + model_charge;
             
-            // Getting value from Function Calculate_Renewal_charege an then return value in  DOTM
+            // Getting value from Function Calculate_Renewal_charge an then return value in  DOTM
             var renewal_charge = Calculate_Renewal_Charge(expiry_date,current_date);
             console.log('renewal Charge',renewal_charge);
             document.getElementById('renewal-charge').innerHTML = 'Rs ' + renewal_charge;
@@ -52,6 +55,11 @@ document.addEventListener('DOMContentLoaded', e => {
 
             //service charge
             document.getElementById('charge').innerHTML = 'Rs ' + charge[0];
+
+            // Getting value from Function Calculate_insurance an then return value in  DOTM
+            var insurance = Calculate_insurance(cc,checked);
+            console.log('renewal fine',insurance);
+            document.getElementById('insurance').innerHTML = 'Rs ' + insurance;
 
             // calculate total bill amt
             var total_amt = current_tax + unpaid_tax + tax_penalty + model_charge + renewal_charge + renewal_fine + charge[0];
@@ -65,11 +73,20 @@ document.addEventListener('DOMContentLoaded', e => {
         }
 
 
-      console.log('current dates',current_date );
-      
+        console.log('current dates',current_date );
+        var timestampDifference = NepaliFunctions.BsDatesDiff(current_date,expiry_date);
+        console.log('difference :',timestampDifference);
 
+        //to close popup while click outside of box
+        window.addEventListener("click" , (event) => {
+            if (!popup.contains(event.target))  {
+                popup.style.display = "none";
+                //to reset the form data
+                document.getElementById('my-form').reset();
+            }
+        })
    
-
+        
 
   });
 
@@ -207,47 +224,66 @@ document.addEventListener('DOMContentLoaded', e => {
     return percentage;
  }
 
- function Calculate_Renewal_Charge(expiry_date,current_date) {
 
-    var timestampDifference = NepaliFunctions.BsDatesDiff(current_date,expiry_date); // Difference in milliseconds
+function Calculate_Renewal_Charge(expiry_date,current_date) {
+    var diffDays = NepaliFunctions.BsDatesDiff(current_date,expiry_date);
+    var amount = 0;
 
     if (expiry_date > current_date) {
-        return 0;
+        amount += 0;
     } else {
-        if (timestampDifference > 1460) {
-            return 800;
-        } else if (timestampDifference > 1095) {
-            return 700;
-        } else if (timestampDifference > 370) {
-            return 600;
-        } else if (timestampDifference > 365) {
-            return 300;
-        } else {
-            return 0;
+        if (diffDays > 1460) {
+            amount += 800;
+        } else if (diffDays > 1095) {
+            amount += 700;
+        } else if (diffDays > 370) {
+            amount += 600;
+        } else if (diffDays > 365) {
+            amount += 300;
         }
     }
+
+    // Adding the result of the first condition to the result of the second condition
+    amount += (expiry_date <= current_date) ? 300 : 0;
+
+    return amount;
 }
+
 
 function Calculate_Renewal_Fine(expiry_date,current_date) {
+    var daysDifference = NepaliFunctions.BsDatesDiff(current_date,expiry_date);
+    var amount = 0;
 
-    var timestampDifference = NepaliFunctions.BsDatesDiff(current_date,expiry_date); // Difference in milliseconds
+    if (daysDifference >= 93) {
+        amount += 300;
+    }
 
-    if (expiry_date > current_date) {
-        return 300;
-    } else {
-        if (timestampDifference > 1460) {
-            return 800;
-        } else if (timestampDifference > 1095) {
-            return 700;
-        } else if (timestampDifference > 370) {
-            return 600;
-        } else if (timestampDifference > 365) {
-            return 300;
-        } else {
-            return 0;
+    if (daysDifference > 1460) {
+        amount += 800;
+    } else if (daysDifference > 1095) {
+        amount += 700;
+    } else if (daysDifference > 370) {
+        amount += 600;
+    } else if (daysDifference > 365) {
+        amount += 300;
+    }
+
+    return amount;
+}
+function Calculate_insurance(cc,checked) {
+    if (checked === true) {
+        if (cc < 150) {
+            return 1705;
+        } else if (cc <= 250) {
+            return 1931;
+        } else if (cc > 250) {
+            return 2157;
         }
+    } else {
+        return 0;
     }
 }
+
 
 
 
