@@ -148,8 +148,30 @@ document.addEventListener('DOMContentLoaded', e => {
         } else {
             return 0;
         }
+    } else if (cc <= 400) {
+        if (expiry_date < d) {
+            return 39800;
+        } else if (expiry_date < c) {
+            return 31000;
+        } else if (expiry_date < b) {
+            return 22000;
+        } else if (expiry_date < a) {
+            return 11000;
+        } else {
+            return 0;
+        }
     } else {
-        return 0;
+        if (expiry_date < d) {
+            return 76500;
+        } else if (expiry_date < c) {
+            return 60000;
+        } else if (expiry_date < b) {
+            return 40000;
+        } else if (expiry_date < a) {
+            return 20000;
+        } else {
+            return 0;
+        }
     }
   }
 
