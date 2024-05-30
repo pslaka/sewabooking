@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', e => {
             // Getting value from Function Calculate_Model_charege an then return value in  DOTM
             var model_charge= Calculate_Model_charge(model, current_tax);
             console.log('Model charge',model_charge);
-            document.getElementById('model-charge').innerHTML = 'Rs ' + model_charge;
+            document.getElementById('model-charge').innerHTML = 'Rs ' + model_charge.toFixed(2);
             
             // Getting value from Function Calculate_Renewal_charge an then return value in  DOTM
             var renewal_charge = Calculate_Renewal_Charge(expiry_date,current_date);
@@ -79,15 +79,15 @@ document.addEventListener('DOMContentLoaded', e => {
         var timestampDifference = NepaliFunctions.BsDatesDiff(current_date,expiry_date);
         console.log('difference :',timestampDifference);
 
-        // //to close popup while click outside of box
-        // window.addEventListener("click" , (event) => {
-        //     if (!popup.contains(event.target))  {
-        //         popup.style.display = "none";
-        //         //to reset the form data
+        //to close popup while click outside of box
+        window.addEventListener("click" , (event) => {
+            if (!popup.contains(event.target))  {
+                popup.style.display = "none";
+                //to reset the form data
                 
-        //     }
-        // })
-        document.getElementById('my-form').reset();
+            }
+        })
+        // document.getElementById('my-form').reset();
    
         
 
