@@ -191,7 +191,7 @@ document.addEventListener('DOMContentLoaded', e => {
         result += 0.20 * current_tax;
     } else if (differenceInDays >= 124) {
         result += 0.10 * current_tax;
-    } else if (differenceInDays >= 93) {
+    } else if (differenceInDays >= 90) {
         result += 0.05 * current_tax;
     }
 
