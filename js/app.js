@@ -68,7 +68,8 @@ document.addEventListener('DOMContentLoaded', e => {
             document.getElementById('totalamt').innerHTML = total_amt;
 
         }else{
-            document.getElementById('seats').style.required; 
+
+            // document.getElementById('seats').required = true; 
             console.log('This section for Four Wheelers');
             //service charge
             document.getElementById('charge').innerHTML = 'Rs ' + charge[1];
@@ -187,9 +188,9 @@ document.addEventListener('DOMContentLoaded', e => {
         result += 0.32 * unpaid_tax;
     }
 
-    if (differenceInDays >= 170) {
+    if (differenceInDays >= 140) {
         result += 0.20 * current_tax;
-    } else if (differenceInDays >= 124) {
+    } else if (differenceInDays >= 110) {
         result += 0.10 * current_tax;
     } else if (differenceInDays >= 90) {
         result += 0.05 * current_tax;
