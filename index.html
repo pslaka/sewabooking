@@ -10,22 +10,48 @@
        <link href="css\nepali.datepicker.v4.0.1.min.css" rel="stylesheet" type="text/css"/>
        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
        <!-- npx tailwindcss -i ./css/input.css -o ./css/style.css --watch -->
-
     <title>Sewa Booking</title>
 </head>
-<body id="body-content" class="font-thin from-neutral-800">
-    <header class="h-[200px] bg-violet-500 ">
-        <div class="w-2/3 mx-auto flex flex-col items-center pt-12">
-                <h1 class="text-4xl md:text-5xl font-extrabold">
-                    <a href="index.html">SEWA B<span class="text-gray-700 ">OO</span>KING</a>
-                </h1>
-            <div class="text-white pt-1">
-                <h1>
-                    Pratice with Tailwind CSS
-                </h1>
-                
+<body id="body-content" class="font-thin from-neutral-800 ">
+    <header class="h-[200px]">
+        <div class="w-2/3 mx-auto flex flex-row justify-between pt-10">
+            <div class="">
+                    <h1 class="text-4xl md:text-5xl font-extrabold">
+                        <a href="index.html">SEWA B<span class="text-gray-700 ">OO</span>KING</a>
+                    </h1>
+                <div class="pt-1 pb-3">
+                    <h1>
+                        Pratice with Tailwind CSS
+                    </h1>
+                    
+                </div>
+            </div>
+            <div>
+                <ul class=" text-white font-semibold flex gap-4 pt-4">
+                    <li class="bg-gray-700 px-2 py-1 rounded-md hover:bg-violet-950 ease-out duration-300" ><i class="fa-brands fa-facebook-f"></i></li>
+                    <li class="bg-gray-700 px-2 py-1 rounded-md hover:bg-violet-950 ease-out duration-300" ><i class="fa-brands fa-instagram"></i></li>
+                    <li class="bg-gray-700 px-2 py-1 rounded-md hover:bg-violet-950 ease-out duration-300" ><i class="fa-brands fa-x-twitter"></i></li>
+                    <li class="bg-gray-700 px-2 py-1 rounded-md hover:bg-violet-950 ease-out duration-300" ><i class="fa-brands fa-linkedin-in"></i></li>
+                </ul>
+
             </div>
         </div>
+        <nav class=" bg-purple-600 ">
+            <div class=" text-white font-bold w-2/3 mx-auto flex flex-row justify-end py-4">
+            
+                    <li class="list-none pr-4 hover:text-orange-400">
+                        <a href="index.html">Home</a>
+                        
+                    </li>
+                    <li class="list-none pr-4">
+                        <a href="insurance.html">Insurance</a>
+                    </li>
+                    <li class="list-none ">
+                        <a href="#">Contact Us</a>
+                    </li>
+                
+        </div>
+        </nav>
     </header>  
 
     <!-- body  -->
@@ -37,7 +63,7 @@
             <div class="w-full  my-10 relative">
                 <form action="" method="get" class="p-2 flex flex-wrap gap-4 " id="my-form">
                     <div class="flex flex-col xl:w-[48.5%] lg:w-[39%] w-full font-medium">
-                        <label for="vehicle" class="py-2">Vehicle Type</label>
+                        <label for="vehicle" class="py-2">Type of Vehicle</label>
                         <!-- <input type="text" placeholder="Name" class="rounded-md py-1.5 pl-2 pr-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" required> -->
                         <select name="vehicle" id="vehicle" class="ring-1 py-1.5 pl-2 pr-2 rounded-md ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 hover:ring-violet-900 ease-out duration-300" required>
                             <option selected value="2">Two Wheelers</option>
@@ -46,11 +72,11 @@
                     </div>
                     <div class="flex flex-col xl:w-[48.5%] lg:w-[39%] w-full font-medium">
                         <label for="cc" class="py-2">Engine CC</label>                    
-                        <input type="number" name="cc" id="cc" placeholder="CC"  value="" class="ring-1 py-1.5 pl-2 pr-2 rounded-md ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 hover:ring-violet-900 ease-out duration-300 " required>
+                        <input type="number" name="cc" id="cc" placeholder="Horse Power CC"  value="" class="ring-1 py-1.5 pl-2 pr-2 rounded-md ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 hover:ring-violet-900 ease-out duration-300 " required>
                     </div>
                     <!-- <div class="flex flex-col xl:w-[48.5%] lg:w-[39%] w-full font-medium">
                         <label for="nepali-datepicker1" class="py-2">Renew Date</label>
-                        <input type="text" name="renew_date" id="nepali-datepicker1"  value="2079-4-1" placeholder="Select Renew Date" class="rounded-md py-1.5 pl-2 pr-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 hover:ring-violet-900 ease-out duration-300" required>
+                        <input type="text" name="renew_date" id="nepali-datepicker1"  value="" placeholder="Select Renew Date" class="rounded-md py-1.5 pl-2 pr-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 hover:ring-violet-900 ease-out duration-300" required>
                     </div> -->
                     <div class="flex flex-col xl:w-[48.5%] lg:w-[39%] w-full font-medium">
                         <label for="nepali-datepicker2" class="py-2">Expiry Date</label>                    
@@ -68,12 +94,18 @@
                     <div  id="additional-input" class="hidden xl:w-[48.5%] lg:w-[39%] w-full font-medium ">
                         <div class="flex flex-col justify-items-start">
                           <label for="seats" class="py-2">Number Of Seats</label>
-                          <input type="number"  name="seats" id="seats"  placeholder="No of Seats" class=" ring-1 py-1.5 pl-2 pr-2 rounded-md ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 hover:ring-violet-900 ease-out duration-300" >            
+                          <input type="number"  name="seats" id="seats"  placeholder="No of Seats" class=" ring-1 py-1.5 pl-2 pr-2 rounded-md ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 hover:ring-violet-900 ease-out duration-300">            
                         </div>
                     </div> 
-                    <div class="w-full flex justify-center pt-6">
-                        <label for="" class="pr-7 font-bold">Thirdparty Insurance</label>
-                        <input type="checkbox" name="checked" id="checked" >
+                    <div class="w-full flex justify-around pt-6">
+                        <div>
+                            <label for="" class="pr-7 font-bold">Thirdparty Insurance</label>
+                            <input type="checkbox" name="checked" id="checked" >
+                        </div>
+                        <div>
+                            <label for="" class="pr-7 font-bold">Have you paid current tax</label>
+                            <input type="checkbox" name="paid" id="paid" >
+                        </div>
                     </div> 
                     <div class="w-full flex justify-center pt-6">
                         <button   id="submit"  class="md:w-32 w-24 bg-violet-600 text-white py-1.5 px-2 rounded-md hover:bg-violet-900 ease-out duration-300">Calculate</button>
@@ -183,6 +215,7 @@
     //     ndpYear: true,
     //     ndpMonth: true,
     //     ndpYearCount: 15,
+    //     disableDaysAfter: 365,
 
     //   });  
       mainInput2.nepaliDatePicker({

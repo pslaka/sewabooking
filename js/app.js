@@ -15,17 +15,18 @@ document.addEventListener('DOMContentLoaded', e => {
       let expiry_date = formData.get('expiry_date');
       let model = formData.get('age');
       let checked = document.getElementById('checked').checked;
+      let paid = document.getElementById('paid').checked;
       console.log(checked)
 
       let current_date = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentBsDate(), "YYYY-MM-DD")
       let fiscal_year = [ '2080-04-01',  '2079-04-01',  '2078-04-01',  '2077-04-01',  '2076-04-01'];
-      let charge =[200 , 300];
+      let charge =[0 , 300];
 
       //Cheching if its two wheelers or four wheelers
       if( type == 2)
         {
             // Getting value from Function Calculate_current_tax an then return value in current-tax DOTM
-            var current_tax = Calculate_Current_Tax(cc, expiry_date, current_date);
+            var current_tax = Calculate_Current_Tax(cc, expiry_date, current_date,paid);
             console.log('Current Tax',current_tax);
             document.getElementById('current-tax').innerHTML = 'Rs '+ current_tax; // put your results where they need to be
 
@@ -42,7 +43,7 @@ document.addEventListener('DOMContentLoaded', e => {
             // Getting value from Function Calculate_Model_charege an then return value in  DOTM
             var model_charge= Calculate_Model_charge(model, current_tax);
             console.log('Model charge',model_charge);
-            document.getElementById('model-charge').innerHTML = 'Rs ' + model_charge.toFixed(2);
+            document.getElementById('model-charge').innerHTML = 'Rs ' + model_charge.toFixed(0);
             
             // Getting value from Function Calculate_Renewal_charge an then return value in  DOTM
             var renewal_charge = Calculate_Renewal_Charge(expiry_date,current_date);
@@ -95,24 +96,29 @@ document.addEventListener('DOMContentLoaded', e => {
   });
 
 
-  function Calculate_Current_Tax(cc, expiry_date, current_date) {
-    if (expiry_date > current_date) {
-        return 0;
-    } else {
-        if (cc <= 125) {
-            return 3000;
-        } else if (cc <= 150) {
-            return 5000;
-        } else if (cc <= 225) {
-            return 6500;
-        } else if (cc <= 400) {
-            return 12500;
-        } else if (cc <= 650) {
-            return 25000;
+  function Calculate_Current_Tax(cc, expiry_date, current_date,paid) {
+
+    if(paid === true)
+        {
+            return 0;
+        }  else if (expiry_date > current_date) {
+            return 0;
         } else {
-            return 35000;
+            if (cc <= 125) {
+                return 3000;
+            } else if (cc <= 150) {
+                return 5000;
+            } else if (cc <= 225) {
+                return 6500;
+            } else if (cc <= 400) {
+                return 12000;
+            } else if (cc <= 650) {
+                return 25000;
+            } else {
+                return 35000;
+            }
         }
-    }
+    
   }
 
   function Calculate_Unpaid_Tax(cc, expiry_date, a, b, c, d) {
@@ -262,7 +268,7 @@ function Calculate_Renewal_Charge(expiry_date,current_date) {
             amount += 800;
         } else if (diffDays > 1095) {
             amount += 700;
-        } else if (diffDays > 370) {
+        } else if (diffDays > 730) {
             amount += 600;
         } else if (diffDays > 365) {
             amount += 300;
@@ -288,7 +294,7 @@ function Calculate_Renewal_Fine(expiry_date,current_date) {
         amount += 800;
     } else if (daysDifference > 1095) {
         amount += 700;
-    } else if (daysDifference > 370) {
+    } else if (daysDifference > 730) {
         amount += 600;
     } else if (daysDifference > 365) {
         amount += 300;
