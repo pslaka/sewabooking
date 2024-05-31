@@ -280,7 +280,7 @@ function Calculate_Renewal_Fine(expiry_date,current_date) {
     var daysDifference = NepaliFunctions.BsDatesDiff(current_date,expiry_date);
     var amount = 0;
 
-    if (daysDifference >= 93) {
+    if (daysDifference >= 90) {
         amount += 300;
     }
 
