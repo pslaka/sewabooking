@@ -2,7 +2,7 @@
 //to trigger thr my-form div for input and popup div for output
 document.addEventListener('DOMContentLoaded', e => {
   let formElement = document.getElementById('my-form');
-  let resultDiv = document.getElementById('popup');
+//   let resultDiv = document.getElementById('popup');
 
   //to prevent from form submitting  
   formElement.addEventListener('submit', e => {
@@ -20,7 +20,8 @@ document.addEventListener('DOMContentLoaded', e => {
 
       let current_date = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentBsDate(), "YYYY-MM-DD")
       let fiscal_year = [ '2080-04-01',  '2079-04-01',  '2078-04-01',  '2077-04-01',  '2076-04-01'];
-      let charge =[0 , 300];
+      let charge =[250 , 350];
+ 
 
       //Cheching if its two wheelers or four wheelers
       if( type == 2)
@@ -82,15 +83,15 @@ document.addEventListener('DOMContentLoaded', e => {
         console.log('difference :',timestampDifference);
 
         //to close popup while click outside of box
-        window.addEventListener("click" , (event) => {
-            if (!popup.contains(event.target))  {
-                popup.style.display = "none";
-                //to reset the form data
-                
-            }
-        })
+       
         // document.getElementById('my-form').reset();
-   
+        const modal = new Modal(document.getElementById('modal'));
+        modal.show();
+    
+        
+
+
+
         
 
   });
