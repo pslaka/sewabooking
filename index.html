@@ -38,26 +38,38 @@
 
                 </div>
             </div>
-            <nav class=" bg-purple-600 my-4 ">
-                <div class=" text-white font-bold w-2/3 mx-auto flex flex-row justify-end py-4">
+           
+
+            <nav class="bg-purple-800 border-gray-200 my-4 relative  z-50 ">
+                <div class="max-w-screen-xl flex flex-col items-end justify-end mx-auto p-4 ">
                 
-                        <li class="list-none pr-4 hover:text-orange-400">
-                            <a href="index.html">Home</a>
-                            
-                        </li>
-                        <li class="list-none pr-4">
-                            <a href="insurance.html">Insurance</a>
-                        </li>
-                        <li class="list-none ">
-                            <a href="test.html">Contact Us</a>
-                        </li>
+                <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-400 " aria-controls="navbar-default" aria-expanded="false">
+                    <span class="sr-only">Open main menu</span>
+                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+                    </svg>
+                </button>
+                <div class="hidden w-full md:block md:w-auto " id="navbar-default">
+                    <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-purple-100 rounded-lg bg-purrple-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-purple-800  ">
+                    <li>
+                        <a href="index.html" class="block py-2 px-3 text-white bg-purple-700 rounded md:bg-transparent md:text-orange-950 md:p-0" aria-current="page">Home</a>
+                    </li>
+                    <li>
+                        <a href="insurance.html" class="block py-2 px-3 text-white rounded hover:bg-purple-100 hover:text-orange-300 md:hover:bg-transparent md:border-0 md:hover:text-orange-300 md:p-0 ">Insurance</a>
+                    </li>
+                    <li>
+                        <a href="#" class="block py-2 px-3 text-white rounded hover:bg-purple-100 hover:text-orange-300 md:hover:bg-transparent md:border-0 md:hover:text-orange-300 md:p-0 ">Contact Us</a>
+                    </li>
                     
-            </div>
+                    </ul>
+                </div>
+                </div>
             </nav>
+  
         </header>  
 
     <!-- body  -->
-    <div class="pt-5 md:pt-15">
+    <div class="mt-5 md:mt-15 -z-50">
         <div class="md:w-[90%] lg:w-[90%] xl:w-[70%] p-10 mx-auto ">          
             <h1 class="text-2xl text-center font-bold flex flex-col after:border-b-2  after:border-violet-600 after:pt-4 after:w-32 after:mx-auto">
                 Vehicle Tax Calculator
@@ -73,7 +85,7 @@
                            </select>                     
                     </div>
                     <div class="flex flex-col xl:w-[48.5%] lg:w-[39%] w-full font-medium">
-                        <label for="cc" class="py-2">Engine CC</label>                    
+                        <label for="cc" class="py-2">Engine CC <span class="text-red-600">*</span></label>                    
                         <input type="number" name="cc" id="cc" placeholder="Horse Power CC"  value="" class="ring-1 py-1.5 pl-2 pr-2 rounded-md ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2  focus:ring-purple-600 sm:text-sm sm:leading-6 hover:ring-purple-800 ease-out duration-300 " required>
                     </div>
                     <!-- <div class="flex flex-col xl:w-[48.5%] lg:w-[39%] w-full font-medium">
@@ -81,7 +93,7 @@
                         <input type="text" name="renew_date" id="nepali-datepicker1"  value="" placeholder="Select Renew Date" class="rounded-md py-1.5 pl-2 pr-2 text-gray-900 ring-2 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2  focus:ring-purple-600 sm:text-sm sm:leading-6 hover:ring-purple-800 ease-out duration-300" required>
                     </div> -->
                     <div class="flex flex-col xl:w-[48.5%] lg:w-[39%] w-full font-medium">
-                        <label for="nepali-datepicker2" class="py-2">Expiry Date</label>                    
+                        <label for="nepali-datepicker2" class="py-2">Expiry Date <span class="text-red-600">*</span></label>                    
                         <input type="text" name="expiry_date" id="nepali-datepicker2" value="" placeholder="Select Expiry Date (Y-M-D)" class="ring-1 py-1.5 pl-2 pr-2 rounded-md ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2  focus:ring-purple-600 sm:text-sm sm:leading-6 hover:ring-purple-800 ease-out duration-300" required>
                     </div>
                     <!-- <div class="flex flex-col xl:w-[48.5%] lg:w-[39%] w-full font-medium">
@@ -89,9 +101,9 @@
                         <input type="text" placeholder="Place" class="rounded-md py-1.5 pl-2 pr-2 text-gray-900 ring-2 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2  focus:ring-purple-600 sm:text-sm sm:leading-6 hover:ring-purple-800 ease-out duration-300" >
                     </div> -->
                     <div class="flex flex-col xl:w-[48.5%] lg:w-[39%] w-full font-medium">
-                        <label for="age" class="py-2">Year of Manufacture</label>                    
+                        <label for="age" class="py-2">Year of Manufacture </label>                    
                         
-                        <input type="number" name="age" id="age" value="" min="1999" max="2024" placeholder="Year (1999-2020)" class="ring-1 py-1.5 pl-2 pr-2 rounded-md ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2  focus:ring-purple-600 sm:text-sm sm:leading-6 hover:ring-purple-800 ease-out duration-300" required>            
+                        <input type="number" name="age" id="age" value="" min="1999" max="2024" placeholder="Year (1999-2020)" class="ring-1 py-1.5 pl-2 pr-2 rounded-md ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2  focus:ring-purple-600 sm:text-sm sm:leading-6 hover:ring-purple-800 ease-out duration-300" >            
                     </div>
                     <div  id="additional-input" class="hidden xl:w-[48.5%] lg:w-[39%] w-full font-medium ">
                         <div class="flex flex-col justify-items-start">

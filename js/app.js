@@ -12,32 +12,46 @@ document.addEventListener('DOMContentLoaded', e => {
       let type = formData.get('vehicle');
       let cc = formData.get('cc'); // get form field values
       let renew_date = formData.get('renew_date');
-      let expiry_date = formData.get('expiry_date');
+      let expiry_date_nepali = formData.get('expiry_date');
       let model = formData.get('age');
       let checked = document.getElementById('checked').checked;
       let paid = document.getElementById('paid').checked;
       console.log(checked)
 
-      let current_date = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentBsDate(), "YYYY-MM-DD")
+      let current_date_nepali = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentBsDate(), "YYYY-MM-DD")
       let fiscal_year = [ '2080-04-01',  '2079-04-01',  '2078-04-01',  '2077-04-01',  '2076-04-01'];
-      let charge =[250 , 350];
- 
+      let charge =[250 , 350];    
+
+
+        // converting string in JS date object
+      const current_date = convertNepaliDateToJSDate(current_date_nepali);
+      const expiry_date = convertNepaliDateToJSDate(expiry_date_nepali);
+      const fiscal_year_80_81 = convertNepaliDateToJSDate(fiscal_year[0]);
+      const fiscal_year_79_80 = convertNepaliDateToJSDate(fiscal_year[1]);
+      const fiscal_year_78_79 = convertNepaliDateToJSDate(fiscal_year[2]);
+      const fiscal_year_77_78 = convertNepaliDateToJSDate(fiscal_year[3]);
+      const fiscal_year_76_77 = convertNepaliDateToJSDate(fiscal_year[4]);
+
+      console.log('current dates',current_date );
+      var timestampDifference = NepaliFunctions.BsDatesDiff(current_date_nepali,expiry_date_nepali);
+      console.log('difference :',timestampDifference);
+
 
       //Cheching if its two wheelers or four wheelers
       if( type == 2)
         {
             // Getting value from Function Calculate_current_tax an then return value in current-tax DOTM
-            var current_tax = Calculate_Current_Tax(cc, expiry_date, current_date,paid);
+            var current_tax = Calculate_Current_Tax(cc, expiry_date_nepali, current_date_nepali,paid);
             console.log('Current Tax',current_tax);
             document.getElementById('current-tax').innerHTML = 'Rs '+ current_tax; // put your results where they need to be
 
             // Getting value from Function Calculate_unpaid_Tax an then return value in unpaid-tax DOTM
-            var unpaid_tax = Calculate_Unpaid_Tax(cc, expiry_date, fiscal_year[0], fiscal_year[1], fiscal_year[2], fiscal_year[3]);
+            var unpaid_tax = Calculate_Unpaid_Tax(cc, expiry_date_nepali,fiscal_year[0],fiscal_year[1],fiscal_year[2],fiscal_year[3],fiscal_year[4]);
             console.log('Current unpaid-tax',unpaid_tax);
             document.getElementById('unpaidtax').innerHTML = 'Rs '+ unpaid_tax;
 
             // Getting value from Function Calculate_unpaid_Tax an then return value in unpaid-tax DOTM
-            var tax_penalty = Calculate_Tax_Penalty(fiscal_year[0], unpaid_tax, expiry_date, current_tax,current_date);
+            var tax_penalty = Calculate_Tax_Penalty(fiscal_year_80_81, unpaid_tax, expiry_date,current_tax,current_date);
             console.log('Tax-Penalty',tax_penalty);
             document.getElementById('tax-penalty').innerHTML ='Rs ' +  tax_penalty;
 
@@ -47,12 +61,17 @@ document.addEventListener('DOMContentLoaded', e => {
             document.getElementById('model-charge').innerHTML = 'Rs ' + model_charge.toFixed(0);
             
             // Getting value from Function Calculate_Renewal_charge an then return value in  DOTM
-            var renewal_charge = Calculate_Renewal_Charge(expiry_date,current_date);
+            // var renewal_charge = Calculate_Renewal_Charge(expiry_date,current_date);
+            // console.log('renewal Charge',renewal_charge);
+            // document.getElementById('renewal-charge').innerHTML = 'Rs ' + renewal_charge;
+
+            // Getting value from Function Calculate_Renewal_charge an then return value in  DOTM (passing date format)
+            var renewal_charge = Calculate_Renewal_Charge(expiry_date,current_date,fiscal_year_80_81,fiscal_year_79_80,fiscal_year_78_79,fiscal_year_77_78);
             console.log('renewal Charge',renewal_charge);
             document.getElementById('renewal-charge').innerHTML = 'Rs ' + renewal_charge;
 
             // Getting value from Function Calculate_Renewal_charege an then return value in  DOTM
-            var renewal_fine = Calculate_Renewal_Fine(expiry_date,current_date);
+            var renewal_fine = Calculate_Renewal_Fine(expiry_date,current_date,fiscal_year_80_81,fiscal_year_79_80,fiscal_year_78_79,fiscal_year);
             console.log('renewal fine',renewal_fine);
             document.getElementById('renewal-fine').innerHTML = 'Rs ' + renewal_fine;
 
@@ -78,23 +97,33 @@ document.addEventListener('DOMContentLoaded', e => {
         }
 
 
-        console.log('current dates',current_date );
-        var timestampDifference = NepaliFunctions.BsDatesDiff(current_date,expiry_date);
-        console.log('difference :',timestampDifference);
+   
 
         //to close popup while click outside of box
        
         // document.getElementById('my-form').reset();
         const modal = new Modal(document.getElementById('modal'));
         modal.show();
-    
-        
-
+  
 
 
         
 
   });
+
+  // Helper function to convert Nepali date string to JavaScript Date object
+function convertNepaliDateToJSDate(nepaliDateStr) {
+    // Example conversion assuming the format is 'YYYY-MM-DD'
+    const [year, month, day] = nepaliDateStr.split('-').map(Number);
+    return new Date(year, month - 1, day); // JavaScript Date months are 0-indexed
+  }
+
+  function js_days_diff(datestr1,datestr2)
+  {
+        var minus = Math.abs(datestr1 - datestr2);
+        const diffDays = Math.ceil(minus / (1000 * 60 * 60 * 24));
+        return diffDays;
+  }
 
 
   function Calculate_Current_Tax(cc, expiry_date, current_date,paid) {
@@ -188,7 +217,8 @@ document.addEventListener('DOMContentLoaded', e => {
 
   function Calculate_Tax_Penalty(current_fiscalyear, unpaid_tax, expiry_date, current_tax,current_date) {
 
-    const differenceInDays = NepaliFunctions.BsDatesDiff(current_date,expiry_date); // Difference in days
+    // const differenceInDays = NepaliFunctions.BsDatesDiff(current_date,expiry_date); // Difference in days
+    const differenceInDays = js_days_diff(current_date,expiry_date);
     let result = 0;
 
     if (expiry_date < current_fiscalyear) {
@@ -258,51 +288,56 @@ document.addEventListener('DOMContentLoaded', e => {
  }
 
 
-function Calculate_Renewal_Charge(expiry_date,current_date) {
-    var diffDays = NepaliFunctions.BsDatesDiff(current_date,expiry_date);
-    var amount = 0;
 
-    if (expiry_date > current_date) {
-        amount += 0;
-    } else {
-        if (diffDays > 1460) {
-            amount += 800;
-        } else if (diffDays > 1095) {
-            amount += 700;
-        } else if (diffDays > 730) {
-            amount += 600;
-        } else if (diffDays > 365) {
+
+
+function Calculate_Renewal_Charge(expiry_date,current_date, fy0,fy1,fy2,fy3,fy4) {
+        var amount = 0;
+    
+        if (expiry_date > current_date) {
+            amount += 0;
+        } else {
+            if (expiry_date < fy3) {
+                amount += 800;
+            } else if (expiry_date < fy2) {
+                amount += 700;
+            } else if (expiry_date < fy1) {
+                amount += 600;
+            } else if (expiry_date < fy0) {
+                amount += 300;
+            }
+        }
+    
+        // Adding the result of the first condition to the result of the second condition
+        amount += (expiry_date <= current_date) ? 300 : 0;
+    
+        return amount;
+    }
+
+
+function Calculate_Renewal_Fine(expiry_date,current_date, fy0,fy1,fy2,fy3,fy4) {
+        // var daysDifference = NepaliFunctions.BsDatesDiff(current_date,expiry_date);
+        var daysDifference = js_days_diff(current_date,expiry_date);
+        console.log(daysDifference)
+        var amount = 0;
+    
+        if (daysDifference >= 90) {
             amount += 300;
         }
+    
+        if (expiry_date < fy3) {
+            amount += 800;
+        } else if (expiry_date < fy2) {
+            amount += 700;
+        } else if (expiry_date < fy1) {
+            amount += 600;
+        } else if (expiry_date < fy0) {
+            amount += 300;
+        }
+    
+        return amount;
     }
 
-    // Adding the result of the first condition to the result of the second condition
-    amount += (expiry_date <= current_date) ? 300 : 0;
-
-    return amount;
-}
-
-
-function Calculate_Renewal_Fine(expiry_date,current_date) {
-    var daysDifference = NepaliFunctions.BsDatesDiff(current_date,expiry_date);
-    var amount = 0;
-
-    if (daysDifference >= 90) {
-        amount += 300;
-    }
-
-    if (daysDifference > 1460) {
-        amount += 800;
-    } else if (daysDifference > 1095) {
-        amount += 700;
-    } else if (daysDifference > 730) {
-        amount += 600;
-    } else if (daysDifference > 365) {
-        amount += 300;
-    }
-
-    return amount;
-}
 function Calculate_insurance(cc,checked) {
     if (checked === true) {
         if (cc < 150) {
