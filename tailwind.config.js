@@ -14,7 +14,9 @@ module.exports = {
         customRed: '#e74c3c',
         customGreen: '#2ecc71',
       },
+      
     },
+   
   },
   variants: {},
   plugins: [],
