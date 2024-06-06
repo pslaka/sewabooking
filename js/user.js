@@ -96,40 +96,40 @@ document.addEventListener('DOMContentLoaded', function() {
                 </tr>
                 <tr class=" bg-gray-200 hover:bg-gray-100">
                         <td class="px-6 py-1">Model Fine</td>
-                        <td class="px-6 py-1" id="model-fine"></td>
+                        <td class="px-6 py-1" id="model-fine">Rs </td>
                 </tr>
                 <tr class=" hover:bg-gray-100">
                         <td class="px-6 py-1">Unpaid Tax</td>
-                        <td class="px-6 py-1" id="unpaidtax"></td>
+                        <td class="px-6 py-1" id="unpaidtax">Rs ${unpaid_tax}</td>
                 </tr>
                 <tr class=" bg-gray-200 hover:bg-gray-100">
                         <td class="px-6 py-1">Unpaid Tax Penalty</td>
-                        <td class="px-6 py-1" id="tax-penalty"></td>
+                        <td class="px-6 py-1" id="tax-penalty">Rs ${tax_penalty}</td>
                 </tr>
                 <tr class=" hover:bg-gray-100">
                         <td class="px-6 py-1">Renewal Fine</td>
-                        <td class="px-6 py-1" id="renewal-fine"></td>
+                        <td class="px-6 py-1" id="renewal-fine">Rs ${renewal_fine}</td>
                 </tr>
                 <tr class=" bg-gray-200 hover:bg-gray-100">
                         <td class="px-6 py-1">Renewal Charge</td>
-                        <td class="px-6 py-1" id="renewal-charge"></td>
+                        <td class="px-6 py-1" id="renewal-charge">Rs ${renewal_charge}</td>
                 </tr>
                 <tr class=" hover:bg-gray-100">
                         <td class="px-6 py-1">Current Tax</td>
-                        <td class="px-6 py-1" id="current-tax"></td>
+                        <td class="px-6 py-1" id="current-tax">Rs ${current_tax}</td>
                 </tr>
 
                 <tr class=" bg-gray-200 hover:bg-gray-100">
                         <td class="px-6 py-1">Service Charge</td>
-                        <td class="px-6 py-1" id="charge"></td>
+                        <td class="px-6 py-1" id="charge">Rs ${service_charge}</td>
                 </tr>
                 <tr class=" hover:bg-gray-100">
                         <td class="px-6 py-1">Third-Party Insurance Charge</td>
-                        <td class="px-6 py-1" id="insurance"></td>
+                        <td class="px-6 py-1" id="insurance">Rs ${insurance}</td>
                 </tr>
                 <thead class="border-t-[1px] border-black font-bold">
                         <td class="px-6 py-3">Total Bill Amount</td>
-                        <td class="px-6 py-3" id="totalamt"> </td>
+                        <td class="px-6 py-3" id="totalamt">Rs ${total_bill}</td>
                 </thead>
                 </table>       
            `;
