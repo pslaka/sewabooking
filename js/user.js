@@ -2,11 +2,6 @@
 
 
 /// list of Function
-function myFunction() {
-    const registrationForm = document.getElementById('registrationForm');
-    registrationForm.submit();
-  }
-
 
   // Helper function to convert Nepali date string to JavaScript Date object
   function convertNepaliDateToJSDate(nepaliDateStr) {

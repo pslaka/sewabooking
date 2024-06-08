@@ -10,34 +10,24 @@ document.addEventListener('DOMContentLoaded', function() {
   
   let step = 1;
 
-//   const showModal = () => {
-//     modalElement.classList.remove('hidden');
-//     modalElement.setAttribute('aria-hidden', 'false');
-
-//   };
-
-//   const hideModal = () => {
-//     modalElement.classList.add('hidden');
-//     modalElement.setAttribute('aria-hidden', 'true');
-//     step = 1;
-//   };
-
-  
-
-const showModal = () => {
+ const showModal = () => {
     modalElement.classList.remove('hidden');
     setTimeout(() => {
-      modalElement.classList.remove('translate-y-full');
+      modalElement.classList.remove('translate-y-full', 'opacity-0');
+      modalElement.classList.add('-translate-y-0', 'opacity-100');
     }, 10);
   };
 
   const hideModal = () => {
-    modalElement.classList.add('translate-y-full');
+    modalElement.classList.remove('translate-y-0', 'opacity-100');
+    modalElement.classList.add('translate-y-full', 'opacity-0');
     setTimeout(() => {
       modalElement.classList.add('hidden');
-    }, 300);
-    step = 1;
+      step = 1;
+      toggleButton.innerText = 'Procced To Payment';
+    }, 300); // Match the duration with the transition duration
   };
+
 
   formElement.addEventListener('submit', function(event) {
     event.preventDefault();
@@ -155,36 +145,37 @@ const showModal = () => {
     if (step === 1) {
       modalTitle.innerText = 'Form Fill Up';
       modalContent.innerHTML = `
-        <form  id="registrationForm" class="max-w-xl w-full mx-auto ">
-                <div class="grid md:grid-cols-2 md:gap-6">
+          <form  id="registrationForm" class="max-w-xl w-full mx-auto ">
+                <div class="grid md:grid-cols-2 md:gap-3">
                     <div class="flex flex-col  w-full font-medium">
                         <label for="full_name" class="py-2">Full Name <span class="text-red-600">*</span></label>                    
-                        <input type="text" name="full_name" id="full_name" placeholder="Full Name"  value="" class="px-2 py-1.5 text-gray-500 border border-gray-400 rounded-lg bg-gray-50 focus:border-purple-700 focus:ring-0 ring-offset-0 sm:text-sm sm:leading-6 hover:border-purple-800 ease-out duration-300" required >
+                        <input type="text" name="full_name" id="full_name" placeholder="Full Name"  value="" class="px-2 py-1.5 text-gray-500 border border-gray-400 rounded-lg bg-gray-50 focus:border-purple-700 focus:ring-0 ring-offset-0 sm:text-sm sm:leading-6 hover:border-purple-800 hover:shadow-md hover:shadow-purple-400 ease-out duration-300" required >
                     </div>
                     <div class="flex flex-col  w-full font-medium">
                         <label for="vehicle_number" class="py-2">Vehicle Number <span class="text-red-600">*</span></label>                    
-                        <input type="text" name="vehicle_number" id="vehicle_number" placeholder="Eg: ba 12 pa 1234"  value="ba 12 pa 1234" class="px-2 py-1.5 text-gray-500 border border-gray-400 rounded-lg bg-gray-50 focus:border-purple-700 focus:ring-0 ring-offset-0 sm:text-sm sm:leading-6 hover:border-purple-800 ease-out duration-300" >
-                    </div>
-                    <div class="flex flex-col  w-full font-medium">
-                        <label for="email" class="py-2">Email <span class="text-red-600">*</span></label>                    
-                        <input type="email" name="email" id="email" placeholder="@gmail.com"  value="proshan@gmail.com" class="px-2 py-1.5 text-gray-500 border border-gray-400 rounded-lg bg-gray-50 focus:border-purple-700 focus:ring-0 ring-offset-0 sm:text-sm sm:leading-6 hover:border-purple-800 ease-out duration-300" >
-                    </div>
-                    <div class="flex flex-col  w-full font-medium">
-                        <label for="address" class="py-2">Address <span class="text-red-600">*</span></label>                    
-                        <input type="text" name="address" id="address" placeholder="Your location"  value="123" class="px-2 py-1.5 text-gray-500 border border-gray-400 rounded-lg bg-gray-50 focus:border-purple-700 focus:ring-0 ring-offset-0 sm:text-sm sm:leading-6 hover:border-purple-800 ease-out duration-300" >
-                    </div>
-                    <div class="flex flex-col  w-full font-medium">
-                        <label for="phone_number" class="py-2">Phone Number <span class="text-red-600">*</span></label>                    
-                        <input type="number" name="phone_number" id="phone_number" placeholder="Your Contact Number "  value="" class="px-2 py-1.5 text-gray-500 border border-gray-400 rounded-lg bg-gray-50 focus:border-purple-700 focus:ring-0 ring-offset-0 sm:text-sm sm:leading-6 hover:border-purple-800 ease-out duration-300" >
+                        <input type="text" name="vehicle_number" id="vehicle_number" placeholder="Eg: ba 12 pa 1234"  value="ba 12 pa 1234" class="px-2 py-1.5 text-gray-500 border border-gray-400 rounded-lg bg-gray-50 focus:border-purple-700 focus:ring-0 ring-offset-0 sm:text-sm sm:leading-6 hover:border-purple-800 hover:shadow-md hover:shadow-purple-400 ease-out duration-300" >
                     </div>
                     <div class="flex flex-col  w-full font-medium">
                         <label for="vehicle" class="py-2">Type of Vehicle</label>
                         <!-- <input type="text" placeholder="Name" class="rounded-md py-1.5 pl-2 pr-2 text-gray-900 ring-2 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2  focus:ring-purple-600 sm:text-sm sm:leading-6" > -->
-                        <select name="vehicle" id="vehicle" class="px-2 py-1.5 text-gray-500 border border-gray-400 rounded-lg bg-gray-50 focus:border-purple-700 focus:ring-0 ring-offset-0 sm:text-sm sm:leading-6 hover:border-purple-800 ease-out duration-300" >
+                        <select name="vehicle" id="vehicle" class="px-2 py-1.5 text-gray-500 border border-gray-400 rounded-lg bg-gray-50 focus:border-purple-700 focus:ring-0 ring-offset-0 sm:text-sm sm:leading-6 hover:border-purple-800 hover:shadow-md hover:shadow-purple-400 ease-out duration-300" >
                             <option selected value="2">Two Wheelers</option>
                             <option value="4">Four Wheelers</option>
                         </select>                     
-                    </div>       
+                    </div> 
+                    <div class="flex flex-col  w-full font-medium">
+                        <label for="email" class="py-2">Email <span class="text-red-600">*</span></label>                    
+                        <input type="email" name="email" id="email" placeholder="@gmail.com"  value="proshan@gmail.com" class="px-2 py-1.5 text-gray-500 border border-gray-400 rounded-lg bg-gray-50 focus:border-purple-700 focus:ring-0 ring-offset-0 sm:text-sm sm:leading-6 hover:border-purple-800 hover:shadow-md hover:shadow-purple-400 ease-out duration-300" >
+                    </div>
+                    <div class="flex flex-col  w-full font-medium">
+                        <label for="address" class="py-2">Address <span class="text-red-600">*</span></label>                    
+                        <input type="text" name="address" id="address" placeholder="Your location"  value="123" class="px-2 py-1.5 text-gray-500 border border-gray-400 rounded-lg bg-gray-50 focus:border-purple-700 focus:ring-0 ring-offset-0 sm:text-sm sm:leading-6 hover:border-purple-800 hover:shadow-md hover:shadow-purple-400 ease-out duration-300" >
+                    </div>
+                    <div class="flex flex-col  w-full font-medium">
+                        <label for="phone_number" class="py-2">Phone Number <span class="text-red-600">*</span></label>                    
+                        <input type="number" name="phone_number" id="phone_number" placeholder="Your Contact Number "  value="" class="px-2 py-1.5 text-gray-500 border border-gray-400 rounded-lg bg-gray-50 focus:border-purple-700 focus:ring-0 ring-offset-0 sm:text-sm sm:leading-6 hover:border-purple-800 hover:shadow-md hover:shadow-purple-400 ease-out duration-300" >
+                    </div>
+                          
                   <div class="flex justify-center items-center p-3 border-t border-gray-200 rounded-b col-span-1 md:col-span-2">  
                     <button id="modal-button"  type="submit" class="text-white bg-purple-500 hover:bg-orange-300 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ease-in-out duration-200">Register</button>
                 </div>                
@@ -213,7 +204,7 @@ const showModal = () => {
           
                 
     } else if (step === 2) {
-      toggleButton.innerText = 'Procced To Payment';
+      
       hideModal();
     }
   });
