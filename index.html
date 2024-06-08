@@ -96,10 +96,6 @@
                         <label for="nepali-datepicker2" class="py-2">Expiry Date <span class="text-red-600">*</span></label>                    
                         <input type="text" name="expiry_date" id="nepali-datepicker2" value="" placeholder="Select Expiry Date (Y-M-D)" class="px-2 py-1.5 text-gray-500 border border-gray-400 rounded-lg bg-gray-50 focus:border-purple-700 focus:ring-0 ring-offset-0 sm:text-sm sm:leading-6 hover:border-purple-800 ease-out duration-300" required>
                     </div>
-                    <!-- <div class="flex flex-col  w-full font-medium">
-                        <label for="Name" class="py-2">Province</label>
-                        <input type="text" placeholder="Place" class="rounded-md py-1.5 pl-2 pr-2 text-gray-900 ring-2 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2  focus:ring-purple-600 sm:text-sm sm:leading-6 hover:ring-purple-800 ease-out duration-300" >
-                    </div> -->
                     <div class="flex flex-col  w-full font-medium">
                         <label for="age" class="py-2">Year of Manufacture </label>                    
                         
@@ -114,11 +110,11 @@
                     <div class="w-full flex justify-around items-center pt-6 col-span-1 md:col-span-2">
                         <div >
                             <input type="checkbox" name="checked" id="checked" class="w-4 h-4 text-orange-600 bg-gray-200 border-orange-500 rounded focus:ring-0 focus:ring-offset-0 ">
-                            <label for="" class="text-gray-800 font-medium ms-4">Thirdparty Insurance</label>
+                            <label for="tp" class="text-gray-800 font-medium ms-4">Thirdparty Insurance</label>
                         </div>
                         <div>
                             <input type="checkbox" name="paid" id="paid" class="w-4 h-4 text-orange-600 bg-gray-200 border-orange-500 rounded ">
-                            <label for="" class="text-gray-800 font-medium ms-4 ">Have You Paid Current Tax</label>
+                            <label for="paid" class="text-gray-800 font-medium ms-4 ">Have You Paid Current Tax</label>
                             
                         </div>
                     </div> 
@@ -140,7 +136,7 @@
     
          
    <!-- Main modal -->
-   <div id="modal"   tabindex="-1" aria-hidden="true" class=" fixed inset-0 flex p-4 hidden z-50 justify-center items-center w-full overflow-x-hidden overflow-y-auto  h-[calc(100%-1rem)] max-h-full bg-black bg-opacity-50">
+   <div id="modal"   tabindex="-1" aria-hidden="true" class=" fixed flex inset-0 p-4 hidden z-50 justify-center items-center w-full overflow-x-hidden overflow-y-auto  h-[calc(100%-1rem)] max-h-full bg-black bg-opacity-50">
     <div class="relative w-full max-w-2xl max-h-full">
         <!-- Modal content -->
         <div class="relative bg-white rounded-lg shadow ">
@@ -157,60 +153,48 @@
             </button>
             </div>
             <!-- Modal body -->
-             <div class="my-4 px-4">
-                <div id="modal-body" class="flex justify-center overflow-x-auto rounded-xl font-normal">   
-                    <!-- contet -->
-                     <!-- <table class="shadow-xl w-full">
-                        <thead class="border-b-2 border-black font-bold py-2 ">
-                            <td class="px-6 py-3">Particulars</td>
-                            <td class="px-6 py-3">Amount</td>
-                        </thead>
-                        <tr class=" hover:bg-gray-100">
-                            <td class="px-6 py-1">Model (Old Age Tax)</td>
-                            <td class="px-6 py-1" id="model-charge"></td>
-                        </tr>
-                        <tr class=" bg-gray-200 hover:bg-gray-100">
-                            <td class="px-6 py-1">Model Fine</td>
-                            <td class="px-6 py-1" id="model-fine"></td>
-                        </tr>
-                        <tr class=" hover:bg-gray-100">
-                            <td class="px-6 py-1">Unpaid Tax</td>
-                            <td class="px-6 py-1" id="unpaidtax"></td>
-                        </tr>
-                        <tr class=" bg-gray-200 hover:bg-gray-100">
-                            <td class="px-6 py-1">Unpaid Tax Penalty</td>
-                            <td class="px-6 py-1" id="tax-penalty"></td>
-                        </tr>
-                        <tr class=" hover:bg-gray-100">
-                            <td class="px-6 py-1">Renewal Fine</td>
-                            <td class="px-6 py-1" id="renewal-fine"></td>
-                        </tr>
-                        <tr class=" bg-gray-200 hover:bg-gray-100">
-                            <td class="px-6 py-1">Renewal Charge</td>
-                            <td class="px-6 py-1" id="renewal-charge"></td>
-                        </tr>
-                        <tr class=" hover:bg-gray-100">
-                            <td class="px-6 py-1">Current Tax</td>
-                            <td class="px-6 py-1" id="current-tax"></td>
-                        </tr>
-
-                            <tr class=" bg-gray-200 hover:bg-gray-100">
-                            <td class="px-6 py-1">Service Charge</td>
-                            <td class="px-6 py-1" id="charge"></td>
-                        </tr>
-                        <tr class=" hover:bg-gray-100">
-                            <td class="px-6 py-1">Third-Party Insurance Charge</td>
-                            <td class="px-6 py-1" id="insurance"></td>
-                        </tr>
-                        <thead class="border-t-[1px] border-black font-bold">
-                            <td class="px-6 py-3">Total Bill Amount</td>
-                            <td class="px-6 py-3" id="totalamt"> </td>
-                        </thead>
-                    </table>                     -->
+             <div class="">
+                <div id="modal-body" class="flex justify-center overflow-x-auto rounded-xl font-normal my-4">   
+                    <!-- contet -->                  
+                            <!-- <form class="max-w-2xl w-full mx-auto ">
+                                <div class="grid md:grid-cols-2 md:gap-6">
+                                    <div class="flex flex-col  w-full font-medium">
+                                        <label for="full_name" class="py-2">Full Name <span class="text-red-600">*</span></label>                    
+                                        <input type="text" name="full_name" id="full_name" placeholder="Full Name"  value="" class="px-2 py-1.5 text-gray-500 border border-gray-400 rounded-lg bg-gray-50 focus:border-purple-700 focus:ring-0 ring-offset-0 sm:text-sm sm:leading-6 hover:border-purple-800 ease-out duration-300" required>
+                                    </div>
+                                    <div class="flex flex-col  w-full font-medium">
+                                        <label for="vehicle_number" class="py-2">Vehicle Number <span class="text-red-600">*</span></label>                    
+                                        <input type="text" name="vehicle_number" id="vehicle_number" placeholder="Eg: ba 12 pa 1234"  value="" class="px-2 py-1.5 text-gray-500 border border-gray-400 rounded-lg bg-gray-50 focus:border-purple-700 focus:ring-0 ring-offset-0 sm:text-sm sm:leading-6 hover:border-purple-800 ease-out duration-300" required>
+                                    </div>
+                                    <div class="flex flex-col  w-full font-medium">
+                                        <label for="email" class="py-2">Email <span class="text-red-600">*</span></label>                    
+                                        <input type="email" name="email" id="email" placeholder="@gmail.com"  value="" class="px-2 py-1.5 text-gray-500 border border-gray-400 rounded-lg bg-gray-50 focus:border-purple-700 focus:ring-0 ring-offset-0 sm:text-sm sm:leading-6 hover:border-purple-800 ease-out duration-300" required>
+                                    </div>
+                                    <div class="flex flex-col  w-full font-medium">
+                                        <label for="address" class="py-2">Address <span class="text-red-600">*</span></label>                    
+                                        <input type="text" name="address" id="address" placeholder="Your location"  value="" class="px-2 py-1.5 text-gray-500 border border-gray-400 rounded-lg bg-gray-50 focus:border-purple-700 focus:ring-0 ring-offset-0 sm:text-sm sm:leading-6 hover:border-purple-800 ease-out duration-300" required>
+                                    </div>
+                                    <div class="flex flex-col  w-full font-medium">
+                                        <label for="phone_number" class="py-2">Phone Number <span class="text-red-600">*</span></label>                    
+                                        <input type="number" name="phone_number" id="phone_number" placeholder="Your Contact Number "  value="" class="px-2 py-1.5 text-gray-500 border border-gray-400 rounded-lg bg-gray-50 focus:border-purple-700 focus:ring-0 ring-offset-0 sm:text-sm sm:leading-6 hover:border-purple-800 ease-out duration-300" required>
+                                    </div>
+                                    <div class="flex flex-col  w-full font-medium">
+                                        <label for="vehicle" class="py-2">Type of Vehicle</label>
+                                        <input type="text" placeholder="Name" class="rounded-md py-1.5 pl-2 pr-2 text-gray-900 ring-2 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2  focus:ring-purple-600 sm:text-sm sm:leading-6" required>
+                                        <select name="vehicle" id="vehicle" class="px-2 py-1.5 text-gray-500 border border-gray-400 rounded-lg bg-gray-50 focus:border-purple-700 focus:ring-0 ring-offset-0 sm:text-sm sm:leading-6 hover:border-purple-800 ease-out duration-300" required>
+                                            <option selected value="2">Two Wheelers</option>
+                                            <option value="4">Four Wheelers</option>
+                                           </select>                     
+                                    </div>
+                                </div>
+                                
+                                <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+                            </form>
+   -->
                 </div>
                 <!-- Modal footer -->
-                <div class="flex justify-center items-center p-5 space-x-2 border-t border-gray-200 rounded-b">  
-                    <button id="modal-button"  type="button" class="text-white bg-purple-500 hover:bg-orange-300 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ease-in-out duration-200">Procced To Payment</button>
+                <div class="flex justify-center items-center p-3 border-t border-gray-200 rounded-b ">  
+                    <button id="modal-button"  type="submit" class="text-white bg-purple-500 hover:bg-orange-300 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ease-in-out duration-200">Proceed To Payment</button>
                 </div>
              </div>
         </div>
