@@ -1,178 +1,21 @@
+<!-- index.html -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Form Submission with Modal</title>
-  <!-- Tailwind CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <!-- Flowbite -->
-  <script src="https://unpkg.com/flowbite@1.6.1/dist/flowbite.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Calculator</title>
 </head>
-<body class=" justify-center items-center h-screen bg-gray-100">
-
-
-   
-
-  <form id="myForm" class="flex flex-col justify-center bg-white p-6 rounded-lg shadow-md w-96">
-    <div class="mb-4">
-      <label for="input" class="block text-gray-700">Input:</label>
-      <input type="text" id="input" class="mt-2 p-2 border border-gray-300 rounded w-full" required>
-    </div>
-    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Submit</button>
-  </form>
-
-  <!-- Main modal -->
-  <div id="modal" tabindex="-1" aria-hidden="true" class="fixed inset-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto h-modal h-full">
-    <div class="relative w-full max-w-2xl h-full md:h-auto mx-auto">
-      <!-- Modal content -->
-      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-        <!-- Modal header -->
-        <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
-          <h3 class="text-xl font-semibold text-gray-900 dark:text-white" id="modalTitle">
-            Submission Result
-          </h3>
-          <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" id="closeButton">
-            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 011.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-            </svg>
-          </button>
-        </div>
-        <!-- Modal body -->
-        <div class="p-6 space-y-6" id="modalBody">
-          <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400" id="modalContent">
-            <!-- Content will be dynamically added here -->
-          </p>
-        </div>
-        <!-- Modal footer -->
-        <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-          <button type="button" id="toggleContent" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Next</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const formElement = document.getElementById('myForm');
-      const modalElement = document.getElementById('modal');
-      const modalContent = document.getElementById('modalContent');
-      const modalTitle = document.getElementById('modalTitle');
-      const closeButton = document.getElementById('closeButton');
-      const toggleButton = document.getElementById('toggleContent');
-      let step = 1;
-
-      const showModal = () => {
-        modalElement.classList.remove('hidden');
-      };
-
-      const hideModal = () => {
-        modalElement.classList.add('hidden');
-        step = 1;
-      };
-
-      formElement.addEventListener('submit', function(event) {
-        event.preventDefault();
-        const inputVal = document.getElementById('input').value;
-        modalTitle.innerText = 'Submission Result';
-        modalContent.innerHTML = `You entered: ${inputVal}
-          <table class="shadow-xl w-full mt-4">
-            <thead class="border-b-2 border-black font-bold hover:bg-gray-50">
-              <tr>
-                <th class="px-6 py-3">Particulars</th>
-                <th class="px-6 py-3">Amount</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="border-b-[1px] border-violet-300 hover:bg-gray-50">
-                <td class="px-6 py-1">Model (Old Age Tax)</td>
-                <td class="px-6 py-1" id="model-charge"></td>
-              </tr>
-              <tr class="border-b-[1px] border-violet-300 hover:bg-gray-50">
-                <td class="px-6 py-1">Model Fine</td>
-                <td class="px-6 py-1" id="model-fine"></td>
-              </tr>
-              <tr class="border-b-[1px] border-violet-300 hover:bg-gray-50">
-                <td class="px-6 py-1">Unpaid Tax</td>
-                <td class="px-6 py-1" id="unpaidtax"></td>
-              </tr>
-              <tr class="border-b-[1px] border-violet-300 hover:bg-gray-50">
-                <td class="px-6 py-1">Unpaid Tax Penalty</td>
-                <td class="px-6 py-1" id="tax-penalty"></td>
-              </tr>
-              <tr class="border-b-[1px] border-violet-300 hover:bg-gray-50">
-                <td class="px-6 py-1">Renewal Fine</td>
-                <td class="px-6 py-1" id="renewal-fine"></td>
-              </tr>
-              <tr class="border-b-[1px] border-violet-300 hover:bg-gray-50">
-                <td class="px-6 py-1">Renewal Charge</td>
-                <td class="px-6 py-1" id="renewal-charge"></td>
-              </tr>
-              <tr class="border-b-[1px] border-violet-300 hover:bg-gray-50">
-                <td class="px-6 py-1">Current Tax</td>
-                <td class="px-6 py-1" id="current-tax"></td>
-              </tr>
-              <tr class="border-b-[1px] border-violet-300 hover:bg-gray-50">
-                <td class="px-6 py-1">Service Charge</td>
-                <td class="px-6 py-1" id="charge"></td>
-              </tr>
-              <tr class="hover:bg-gray-50">
-                <td class="px-6 py-1">Third-Party Insurance Charge</td>
-                <td class="px-6 py-1" id="insurance"></td>
-              </tr>
-              <tr class="border-t-[2px] border-black font-bold">
-                <td class="px-6 py-3">Total Bill Amount</td>
-                <td class="px-6 py-3" id="totalamt"></td>
-              </tr>
-            </tbody>
-          </table>`;
-        showModal();
-      });
-
-      toggleButton.addEventListener('click', function() {
-        if (step === 1) {
-          modalTitle.innerText = 'Register';
-          modalContent.innerHTML = `
-            <form id="registrationForm">
-              <div class="mb-4">
-                <label for="username" class="block text-gray-700">Username:</label>
-                <input type="text" id="username" class="mt-2 p-2 border border-gray-300 rounded w-full" required>
-              </div>
-              <div class="mb-4">
-                <label for="email" class="block text-gray-700">Email:</label>
-                <input type="email" id="email" class="mt-2 p-2 border border-gray-300 rounded w-full" required>
-              </div>
-              <div class="mb-4">
-                <label for="password" class="block text-gray-700">Password:</label>
-                <input type="password" id="password" class="mt-2 p-2 border border-gray-300 rounded w-full" required>
-              </div>
-              <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Register</button>
-            </form>`;
-          toggleButton.innerText = 'Submit';
-          step++;
-        // } else if (step === 2) {
-          const registrationForm = document.getElementById('registrationForm');
-          registrationForm.addEventListener('submit', function(event) {
-            event.preventDefault();
-            const username = document.getElementById('username').value;
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            console.log({ username, email, password });
-            modalTitle.innerText = 'QR Code';
-            modalContent.innerHTML = `
-              <div class="flex justify-center items-center h-full">
-                <img src="https://via.placeholder.com/150" alt="QR Code" class="w-32 h-32">
-              </div>`;
-            toggleButton.innerText = 'Close';
-            step++;
-          });
-        } else if (step === 3) {
-          hideModal();
-        }
-      });
-
-      closeButton.addEventListener('click', hideModal);
-    });
-  </script>
+<body>
+    <h1>Number Calculator</h1>
+    <form action="/calculate" method="POST">
+        <label for="number1">Number 1:</label>
+        <input type="number" id="number1" name="number1" required><br><br>
+        <label for="number2">Number 2:</label>
+        <input type="number" id="number2" name="number2" required><br><br>
+        <button type="submit">Calculate</button>
+    </form>
+    <script src="js/server.js"></script>
 </body>
 </html>

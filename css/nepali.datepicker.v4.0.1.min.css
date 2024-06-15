@@ -140,11 +140,12 @@ div#ndp-nepali-box a,div.ndp-nepali-box a{
     right:7px
 }
 #currentMonth #ndp-month-select,#currentMonth #ndp-year-select{
-    color:#000;
+    color:#720fec;
     font-size:12px;
     font-weight:400;
-    padding:2px 1px 0;
-    height:22px
+    padding:2px 1px 4px 0;
+    height:22px;
+    width:60px;
 }
 .ndp-corner-all,.ndp-corner-left,.ndp-corner-tl,.ndp-corner-top{
     -moz-border-radius-topleft:5px;

@@ -76,6 +76,8 @@ document.addEventListener('DOMContentLoaded', function() {
             //service charge
             document.getElementById('charge').innerHTML = 'Rs ' + charge[1];
         }
+
+    
     modalTitle.innerText = 'Vehicle tax Details';
     modalContent.innerHTML = `
          <table class="shadow-xl w-full">
@@ -145,7 +147,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (step === 1) {
       modalTitle.innerText = 'Form Fill Up';
       modalContent.innerHTML = `
-          <form  id="registrationForm" class="max-w-xl w-full mx-auto ">
+          <form  id="registrationForm" class="max-w-xl w-full mx-auto " action="/register" method="post">
                 <div class="grid md:grid-cols-2 md:gap-3">
                     <div class="flex flex-col  w-full font-medium">
                         <label for="full_name" class="py-2">Full Name <span class="text-red-600">*</span></label>                    
@@ -186,12 +188,41 @@ document.addEventListener('DOMContentLoaded', function() {
 
       //form submission and handler (registrationForm)
       const registrationForm = document.getElementById('registrationForm');
-      registrationForm.addEventListener('submit', function(event) {
+      registrationForm.addEventListener('submit', async function(event) {
         event.preventDefault();
-        const username = document.getElementById('full_name').value;
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('vehicle_number').value;
-        console.log({ username, email, password });
+
+        // Get form data
+        const formData = new FormData(document.getElementById('registrationForm'));
+        // const formObject = {};
+        //       formData.forEach((value, key) => {
+        //         formObject[key] = value;
+        //       });
+        //       // console.log(formData);
+        //       console.log(formObject)
+        try {
+          const response = await fetch('/register', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(Object.fromEntries(formData))
+          });
+
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+
+          const data = await response.text();
+          console.log('Server Response:', data);
+        } catch (error) {
+          console.error('Error submitting form:', error.message || error);
+          alert('Error submitting form. Please try again.');
+        }
+        
+      
+
+         
+
         modalTitle.innerText = 'QR Code';
         modalContent.innerHTML = `
           <div class="flex justify-center items-center h-full">
@@ -201,6 +232,12 @@ document.addEventListener('DOMContentLoaded', function() {
         toggleButton.classList.remove('hidden');
         step++;
       }); 
+
+
+      
+
+
+
           
                 
     } else if (step === 2) {
