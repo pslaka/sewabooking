@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (step === 1) {
       modalTitle.innerText = 'Form Fill Up';
       modalContent.innerHTML = `
-          <form  id="registrationForm" class="max-w-xl w-full mx-auto " action="/register" method="post">
+          <form  id="registrationForm" class="max-w-xl w-full mx-auto " action="https://pslaka.github.io/register" method="post">
                 <div class="grid md:grid-cols-2 md:gap-3">
                     <div class="flex flex-col  w-full font-medium">
                         <label for="full_name" class="py-2">Full Name <span class="text-red-600">*</span></label>                    
