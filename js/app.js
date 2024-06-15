@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                     <div class="flex flex-col  w-full font-medium">
                         <label for="vehicle_number" class="py-2">Vehicle Number <span class="text-red-600">*</span></label>                    
-                        <input type="text" name="vehicle_number" id="vehicle_number" placeholder="Eg: ba 12 pa 1234"  value="ba 12 pa 1234" class="px-2 py-1.5 text-gray-500 border border-gray-400 rounded-lg bg-gray-50 focus:border-purple-700 focus:ring-0 ring-offset-0 sm:text-sm sm:leading-6 hover:border-purple-800 hover:shadow-md hover:shadow-purple-400 ease-out duration-300" >
+                        <input type="text" name="vehicle_number" id="vehicle_number" placeholder="Eg: ba 12 pa 1234"  value="" class="px-2 py-1.5 text-gray-500 border border-gray-400 rounded-lg bg-gray-50 focus:border-purple-700 focus:ring-0 ring-offset-0 sm:text-sm sm:leading-6 hover:border-purple-800 hover:shadow-md hover:shadow-purple-400 ease-out duration-300" required>
                     </div>
                     <div class="flex flex-col  w-full font-medium">
                         <label for="vehicle" class="py-2">Type of Vehicle</label>
@@ -167,11 +167,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div> 
                     <div class="flex flex-col  w-full font-medium">
                         <label for="email" class="py-2">Email <span class="text-red-600">*</span></label>                    
-                        <input type="email" name="email" id="email" placeholder="@gmail.com"  value="proshan@gmail.com" class="px-2 py-1.5 text-gray-500 border border-gray-400 rounded-lg bg-gray-50 focus:border-purple-700 focus:ring-0 ring-offset-0 sm:text-sm sm:leading-6 hover:border-purple-800 hover:shadow-md hover:shadow-purple-400 ease-out duration-300" >
+                        <input type="email" name="email" id="email" placeholder="@gmail.com"  value="" class="px-2 py-1.5 text-gray-500 border border-gray-400 rounded-lg bg-gray-50 focus:border-purple-700 focus:ring-0 ring-offset-0 sm:text-sm sm:leading-6 hover:border-purple-800 hover:shadow-md hover:shadow-purple-400 ease-out duration-300" required >
                     </div>
                     <div class="flex flex-col  w-full font-medium">
                         <label for="address" class="py-2">Address <span class="text-red-600">*</span></label>                    
-                        <input type="text" name="address" id="address" placeholder="Your location"  value="123" class="px-2 py-1.5 text-gray-500 border border-gray-400 rounded-lg bg-gray-50 focus:border-purple-700 focus:ring-0 ring-offset-0 sm:text-sm sm:leading-6 hover:border-purple-800 hover:shadow-md hover:shadow-purple-400 ease-out duration-300" >
+                        <input type="text" name="address" id="address" placeholder="Your location"  value="" class="px-2 py-1.5 text-gray-500 border border-gray-400 rounded-lg bg-gray-50 focus:border-purple-700 focus:ring-0 ring-offset-0 sm:text-sm sm:leading-6 hover:border-purple-800 hover:shadow-md hover:shadow-purple-400 ease-out duration-300" required >
                     </div>
                     <div class="flex flex-col  w-full font-medium">
                         <label for="phone_number" class="py-2">Phone Number <span class="text-red-600">*</span></label>                    
@@ -214,32 +214,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
           const data = await response.text();
           console.log('Server Response:', data);
-          alert('Form submitted successfully!');
+            //if form success on submission then it will go on next step 
+          modalTitle.innerText = 'QR Code';
+          modalContent.innerHTML = `
+            <div class="flex justify-center items-center h-full">
+              <img src="https://via.placeholder.com/150" alt="QR Code" class="w-32 h-32">
+            </div>`;
+          toggleButton.innerText = 'Close';
+          toggleButton.classList.remove('hidden');
+          step++;
         } catch (error) {
           console.error('Error submitting form:', error.message || error);
           alert('Error submitting form. Please try again.');
         }
-        
-      
-
-         
-
-        modalTitle.innerText = 'QR Code';
-        modalContent.innerHTML = `
-          <div class="flex justify-center items-center h-full">
-            <img src="https://via.placeholder.com/150" alt="QR Code" class="w-32 h-32">
-          </div>`;
-        toggleButton.innerText = 'Close';
-        toggleButton.classList.remove('hidden');
-        step++;
+            
       }); 
-
-
-      
-
-
-
-          
                 
     } else if (step === 2) {
       
