@@ -60,7 +60,17 @@ const { full_name, vehicle_number, vehicle, email, address, phone_number } = req
 
   // Save to MongoDB
   formData.save()
-  
+    .then(() => {
+      console.log('Form data saved to MongoDB');
+      res.send('Form submitted and saved successfully!');
+    })
+    .catch((err) => {
+      console.error('Error saving form data:', err);
+      res.status(500).send('Error saving form data. Please try again later.');
+    });
+
+
+
 });
 
 // Serve HTML files

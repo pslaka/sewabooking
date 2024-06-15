@@ -214,6 +214,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
           const data = await response.text();
           console.log('Server Response:', data);
+          alert('Form submitted successfully!');
         } catch (error) {
           console.error('Error submitting form:', error.message || error);
           alert('Error submitting form. Please try again.');
