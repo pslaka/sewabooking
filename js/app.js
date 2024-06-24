@@ -211,7 +211,7 @@ document.addEventListener('DOMContentLoaded', function() {
         //       // console.log(formData);
         //       console.log(formObject)
         try {
-          const response = await fetch('/register', {
+          const response = await fetch('https://pslaka.github.io/register', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
