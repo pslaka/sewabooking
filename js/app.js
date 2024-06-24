@@ -12,6 +12,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
  const showModal = () => {
     modalElement.classList.remove('hidden');
+    modalElement.classList.add('flex');
+
     setTimeout(() => {
       modalElement.classList.remove('translate-y-full', 'opacity-0');
       modalElement.classList.add('-translate-y-0', 'opacity-100');
@@ -19,31 +21,32 @@ document.addEventListener('DOMContentLoaded', function() {
   };
 
   const hideModal = () => {
-    modalElement.classList.remove('translate-y-0', 'opacity-100');
-    modalElement.classList.add('translate-y-full', 'opacity-0');
-    setTimeout(() => {
-      modalElement.classList.add('hidden');
+    
+    modalElement.classList.add('hidden');
       step = 1;
       toggleButton.innerText = 'Procced To Payment';
+    setTimeout(() => {
+      modalElement.classList.remove('translate-y-0', 'opacity-100');
+      modalElement.classList.add('translate-y-full', 'opacity-0');
     }, 300); // Match the duration with the transition duration
   };
 
 
   formElement.addEventListener('submit', function(event) {
     event.preventDefault();
-    let formData = new FormData(formElement); // build form data
-    let type = formData.get('vehicle');
-    let cc = formData.get('cc'); // get form field values
-    let renew_date = formData.get('renew_date');
-    let expiry_date_nepali = formData.get('expiry_date');
-    let model = formData.get('age');
-    let checked = document.getElementById('checked').checked;
-    let paid = document.getElementById('paid').checked;
+    const formData = new FormData(formElement); // build form data
+    const type = formData.get('vehicle');
+    const cc = formData.get('cc'); // get form field values
+    // const renew_date = formData.get('renew_date');
+    const expiry_date_nepali = formData.get('expiry_date');
+    const model = formData.get('age');
+    const checked = document.getElementById('checked').checked;
+    const paid = document.getElementById('paid').checked;
     console.log(checked)
 
-    let current_date_nepali = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentBsDate(), "YYYY-MM-DD")
-    let fiscal_year = [ '2080-04-01',  '2079-04-01',  '2078-04-01',  '2077-04-01',  '2076-04-01'];
-    let charge = [0 , 0];    
+    const current_date_nepali = NepaliFunctions.ConvertDateFormat(NepaliFunctions.GetCurrentBsDate(), "YYYY-MM-DD")
+    const fiscal_year = [ '2080-04-01',  '2079-04-01',  '2078-04-01',  '2077-04-01',  '2076-04-01'];
+    const charge = [0 , 0];    
 
 
       // converting string in JS date object
@@ -57,29 +60,31 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
          //Cheching if its two wheelers or four wheelers
-      if( type == 2)
-        {
+      // if( type == 2)
+      //   {
             // Getting value from Function Calculate_current_tax an then return value in current-tax DOTM
-            var current_tax = Calculate_Current_Tax(cc, expiry_date_nepali, current_date_nepali,paid);         
-            var unpaid_tax = Calculate_Unpaid_Tax(cc, expiry_date_nepali,fiscal_year[0],fiscal_year[1],fiscal_year[2],fiscal_year[3],fiscal_year[4]);
-            var tax_penalty = Calculate_Tax_Penalty(fiscal_year_80_81, unpaid_tax, expiry_date,current_tax,current_date);
-            var model_charge= Calculate_Model_charge(model, current_tax);
-            var renewal_charge = Calculate_Renewal_Charge(expiry_date,current_date,fiscal_year_80_81,fiscal_year_79_80,fiscal_year_78_79,fiscal_year_77_78);
-            var renewal_fine = Calculate_Renewal_Fine(expiry_date,current_date,fiscal_year_80_81,fiscal_year_79_80,fiscal_year_78_79,fiscal_year);
-            var service_charge = charge[0];
-            var insurance = Calculate_insurance(cc,checked);
-            var total_bill = current_tax + unpaid_tax + tax_penalty + model_charge + renewal_charge + renewal_fine + charge[0] + insurance;
-        }else{
+            let current_tax = Calculate_Current_Tax(cc, expiry_date_nepali, current_date_nepali,paid);         
+            let unpaid_tax = Calculate_Unpaid_Tax(cc, expiry_date_nepali,fiscal_year[0],fiscal_year[1],fiscal_year[2],fiscal_year[3],fiscal_year[4]);
+            let tax_penalty = Calculate_Tax_Penalty(fiscal_year_80_81, unpaid_tax, expiry_date,current_tax,current_date);
+            let model_charge = Calculate_Model_charge(model, current_tax);
+            let renewal_charge = Calculate_Renewal_Charge(expiry_date,current_date,fiscal_year_80_81,fiscal_year_79_80,fiscal_year_78_79,fiscal_year_77_78);
+            let renewal_fine = Calculate_Renewal_Fine(expiry_date,current_date,fiscal_year_80_81,fiscal_year_79_80,fiscal_year_78_79,fiscal_year);
+            let service_charge = charge[0];
+            let insurance = Calculate_insurance(cc,checked);
+            let total_bill = current_tax + unpaid_tax + tax_penalty + model_charge + renewal_charge + renewal_fine + service_charge + insurance;
+        // }else{
 
-            // document.getElementById('seats').required = true; 
-            console.log('This section for Four Wheelers');
-            //service charge
-            document.getElementById('charge').innerHTML = 'Rs ' + charge[1];
-        }
+        //     // document.getElementById('seats').required = true; 
+        //     console.log('This section for Four Wheelers');
+        //     //service charge
+        //     document.getElementById('charge').innerHTML = 'Rs ' + charge[1];
+        // }
 
-    
+      
     modalTitle.innerText = 'Vehicle tax Details';
-    modalContent.innerHTML = `
+    if(type ==2) {
+
+        modalContent.innerHTML = `
          <table class="shadow-xl w-full">
                 <thead class="border-b-2 border-black font-bold py-2 ">
                         <td class="px-6 py-3">Particulars</td>
@@ -87,47 +92,53 @@ document.addEventListener('DOMContentLoaded', function() {
                 </thead>
                 <tr class=" hover:bg-gray-100">
                         <td class="px-6 py-1">Model (Old Age Tax)</td>
-                        <td class="px-6 py-1" id="model-charge">Rs  ${model_charge}</td>
+                        <td class="px-6 py-1" >Rs  ${model_charge}</td>
                 </tr>
                 <tr class=" bg-gray-200 hover:bg-gray-100">
                         <td class="px-6 py-1">Model Fine</td>
-                        <td class="px-6 py-1" id="model-fine">Rs </td>
+                        <td class="px-6 py-1" >Rs </td>
                 </tr>
                 <tr class=" hover:bg-gray-100">
                         <td class="px-6 py-1">Unpaid Tax</td>
-                        <td class="px-6 py-1" id="unpaidtax">Rs ${unpaid_tax}</td>
+                        <td class="px-6 py-1" >Rs ${unpaid_tax}</td>
                 </tr>
                 <tr class=" bg-gray-200 hover:bg-gray-100">
                         <td class="px-6 py-1">Unpaid Tax Penalty</td>
-                        <td class="px-6 py-1" id="tax-penalty">Rs ${tax_penalty}</td>
+                        <td class="px-6 py-1" >Rs ${tax_penalty}</td>
                 </tr>
                 <tr class=" hover:bg-gray-100">
                         <td class="px-6 py-1">Renewal Fine</td>
-                        <td class="px-6 py-1" id="renewal-fine">Rs ${renewal_fine}</td>
+                        <td class="px-6 py-1" >Rs ${renewal_fine}</td>
                 </tr>
                 <tr class=" bg-gray-200 hover:bg-gray-100">
                         <td class="px-6 py-1">Renewal Charge</td>
-                        <td class="px-6 py-1" id="renewal-charge">Rs ${renewal_charge}</td>
+                        <td class="px-6 py-1" >Rs ${renewal_charge}</td>
                 </tr>
                 <tr class=" hover:bg-gray-100">
                         <td class="px-6 py-1">Current Tax</td>
-                        <td class="px-6 py-1" id="current-tax">Rs ${current_tax}</td>
+                        <td class="px-6 py-1" >Rs ${current_tax}</td>
                 </tr>
 
                 <tr class=" bg-gray-200 hover:bg-gray-100">
                         <td class="px-6 py-1">Service Charge</td>
-                        <td class="px-6 py-1" id="charge">Rs ${service_charge}</td>
+                        <td class="px-6 py-1" >Rs ${service_charge}</td>
                 </tr>
                 <tr class=" hover:bg-gray-100">
                         <td class="px-6 py-1">Third-Party Insurance Charge</td>
-                        <td class="px-6 py-1" id="insurance">Rs ${insurance}</td>
+                        <td class="px-6 py-1" >Rs ${insurance}</td>
                 </tr>
                 <thead class="border-t-[1px] border-black font-bold">
                         <td class="px-6 py-3">Total Bill Amount</td>
-                        <td class="px-6 py-3" id="totalamt">Rs ${total_bill}</td>
+                        <td class="px-6 py-3" >Rs ${total_bill}</td>
                 </thead>
                 </table>       
            `;
+    } else {
+
+        modalContent.innerHTML = `
+        <h1> For Car section </h1>  
+         `;
+    }
     showModal();
   });
   if (step === 2) {
@@ -146,7 +157,7 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('Toggle Button Clicked:', step);
     if (step === 1) {
       modalTitle.innerText = 'Form Fill Up';
-      modalContent.innerHTML = `
+      modalContent.innerHTML = `-
           <form  id="registrationForm" class="max-w-xl w-full mx-auto " action="https://pslaka.github.io/register" method="post">
                 <div class="grid md:grid-cols-2 md:gap-3">
                     <div class="flex flex-col  w-full font-medium">
